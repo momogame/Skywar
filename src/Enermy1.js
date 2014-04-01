@@ -4,7 +4,7 @@ var	Enermy = cc.Sprite.extend({
 		this._super();
         this.initWithFile( 'image/obj2.png' );
         this. setScale	(0.1);
-        this.vy = 1;
+        this.vy = 1.5;
 	},
 	update: function(dt){
 		var pos = this.getPosition();
@@ -21,6 +21,9 @@ var	Enermy = cc.Sprite.extend({
 
 		//var x = Math.abs(this.gameLayer.player.getPosition().x-this.Enermy.getPosition().x);
 		//var y = Math.abs(this.gameLayer.player.getPosition().y-this.Enermy.getPosition().y);
+
+
+
 		if(this.gameLayer.player.getPosition().x<=this.getPosition().x){
 			if ((this.gameLayer.player.getPosition().x==this.getPosition().x)&&(this.gameLayer.player.getPosition().y<this.getPosition().y)) {
 				this.setPosition( new cc.Point( pos.x,pos.y-this.vy) );
@@ -80,7 +83,12 @@ var	Enermy = cc.Sprite.extend({
 			var movingAction = cc.Animate.create( animation );
 			this.runAction( movingAction );
 			*/
-			this.setPosition( new cc.Point( 600, 600));
+			this.randomX = Math.random()*800;
+			this.randomY = Math.random()*800;
+			this.setPosition( new cc.Point( this.randomX, this.randomY));
+			this.gameLayer.i +=1;
+
+			this.gameLayer.scoreLabel.setString(this.gameLayer.i);
 			};
 			
 		};

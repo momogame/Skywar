@@ -19,13 +19,16 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.enermy, 3);
         this.enermy.scheduleUpdate();
 
-        
-       
+        this.i=0;
+        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
+        this.addChild( this.scoreLabel,3 );
+
         this.setKeyboardEnabled( true );
         return true;
     },
     onKeyDown: function( e ) {
-        console.log( 'Up: ' + e );
+       // console.log( 'Up: ' + e );
         if (e==38) {
             //console.log( 'Up: ' + e );
             this.player.up();
