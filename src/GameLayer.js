@@ -1,5 +1,6 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
+        this.state = GameLayer.STATES.FRONT;
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
 
@@ -61,9 +62,29 @@ var GameLayer = cc.LayerColor.extend({
             this.player.stop();
             this.back.stop();
 
-    }
-});
+    },
+    endGame: function() {
+        
+       
+        if(this.state == GameLayer.STATES.FRONT){
+            this.over = new over();
+            this.over.setPosition( new cc.Point( 800 / 2, 600 / 2 ) );
+            this.addChild( this.over, 5 );
+        }
+         this.state = GameLayer.STATES.DEAD;
+        
+        this.player.stopplayer();
 
+
+        
+        }
+    }
+);
+
+GameLayer.STATES = {
+    FRONT: 1,
+    STARTED: 2
+};
 
 var StartScene = cc.Scene.extend({
     onEnter: function() {
@@ -74,4 +95,6 @@ var StartScene = cc.Scene.extend({
     },
 
 });
+
+
 

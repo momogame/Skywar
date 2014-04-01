@@ -39,6 +39,9 @@ var Player = cc.Sprite.extend({
 		 },
 		 start: function() {
         this.started = true;
+    },
+    stopplayer: function() {
+    this.started = false;
     }
 
 })

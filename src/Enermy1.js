@@ -23,8 +23,14 @@ var	Enermy = cc.Sprite.extend({
 		//var y = Math.abs(this.gameLayer.player.getPosition().y-this.Enermy.getPosition().y);
 
 
+		if (((this.gameLayer.player.getPosition().x+50)>=this.getPosition().x)&&(this.gameLayer.player.getPosition().x-50)<=this.getPosition().x) {
+			if (((this.gameLayer.player.getPosition().y+40)>=this.getPosition().y)&&(this.gameLayer.player.getPosition().y-40)<=this.getPosition().y) {
+				this.gameLayer.endGame();
 
-		if(this.gameLayer.player.getPosition().x<=this.getPosition().x){
+			};
+			
+		}
+			if(this.gameLayer.player.getPosition().x<=this.getPosition().x){
 			if ((this.gameLayer.player.getPosition().x==this.getPosition().x)&&(this.gameLayer.player.getPosition().y<this.getPosition().y)) {
 				this.setPosition( new cc.Point( pos.x,pos.y-this.vy) );
 			}
