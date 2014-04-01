@@ -27,24 +27,24 @@ var GameLayer = cc.LayerColor.extend({
     onKeyDown: function( e ) {
         console.log( 'Up: ' + e );
         if (e==38) {
-            console.log( 'Up: ' + e );
+            //console.log( 'Up: ' + e );
             this.player.up();
-        };
-        if (e==40) {
-             console.log( 'down: ' + e );
+        }
+        else if (e==40) {
+             //console.log( 'down: ' + e );
             this.player.down();
-        };
-        if (e==39) {
-            console.log( 'right: ' + e );
+        }
+        else if (e==39) {
+            //console.log( 'right: ' + e );
             this.player.right();
             this.back.right();
-        };
-        if (e==37) {
-             console.log( 'left: ' + e );
+        }
+        else if (e==37) {
+            // console.log( 'left: ' + e );
             this.player.left();
             this.back.left();
-        };
-        if (e==32) {
+        }
+        else if (e==32) {
             this.Shoot = new ammo(this);
             this.Shoot.setPosition( new cc.Point( this.player.getPosition().x,this.player.getPosition().y) );
             this.addChild( this.Shoot, 1 );

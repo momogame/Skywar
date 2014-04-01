@@ -9,8 +9,8 @@ var Player = cc.Sprite.extend({
     } ,
     update: function(dt) { 
     	var pos = this.getPosition();
-    	if (pos.y<=550&&pos.x>=50) {this.setPosition( new cc.Point( pos.x, pos.y + this.vy ) );};
-    	if(pos.y>=550){this.setPosition( new cc.Point( pos.x,550) );};
+    	if (pos.y<=550&&pos.x>=50) {this.setPosition( new cc.Point( pos.x, pos.y + this.vy ) );}
+    	else if(pos.y>=550){this.setPosition( new cc.Point( pos.x,550) );};
     	
     	this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
     	
