@@ -13,7 +13,11 @@
         //SingleEngineFile:'',
         appFiles:[
             'src/GameLayer.js' ,
-            'src/player.js'    //add your own files in order here
+            'src/player.js',
+            'src/Shoot.js',
+            'src/BackGround.js',
+            'src/Enermy1.js',
+            'src/OverFun.js',    //add your own files in order here
         ]
     };
 
