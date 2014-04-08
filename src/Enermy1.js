@@ -6,78 +6,22 @@ var	Enermy = cc.Sprite.extend({
         this. setScale	(0.1);
         this.vy = 1.5;
 	},
-	update: function(dt){
+	update: function( dt ){
 		var pos = this.getPosition();
-		/*
-		if(this.getPosition().y>580){
-			this.vy =-2;
-		};
-			
-		if (this.getPosition().y<50) {
-			this.vy =2;
-		};
-		this.setPosition( new cc.Point( pos.x,pos.y+this.vy) );
-		*/
-
-		//var x = Math.abs(this.gameLayer.player.getPosition().x-this.Enermy.getPosition().x);
-		//var y = Math.abs(this.gameLayer.player.getPosition().y-this.Enermy.getPosition().y);
-
-
-		if (((this.gameLayer.player.getPosition().x+50)>=this.getPosition().x)&&(this.gameLayer.player.getPosition().x-50)<=this.getPosition().x) {
-			if (((this.gameLayer.player.getPosition().y+40)>=this.getPosition().y)&&(this.gameLayer.player.getPosition().y-40)<=this.getPosition().y) {
-				this.gameLayer.endGame();
-
-			};
-			
-		}
-			if(this.gameLayer.player.getPosition().x<=this.getPosition().x){
-			if ((this.gameLayer.player.getPosition().x==this.getPosition().x)&&(this.gameLayer.player.getPosition().y<this.getPosition().y)) {
-				this.setPosition( new cc.Point( pos.x,pos.y-this.vy) );
-			}
-			else if ((this.gameLayer.player.getPosition().x==this.getPosition().x)&&(this.gameLayer.player.getPosition().y>this.getPosition().y)) {
-				this.setPosition( new cc.Point( pos.x,pos.y+this.vy) );
-			}
-			else if ((this.gameLayer.player.getPosition().y==this.getPosition().y)&&(this.gameLayer.player.getPosition().x<this.getPosition().x)) {
-				this.setPosition( new cc.Point( pos.x-this.vy,pos.y) );
-			}
-			else if ((this.gameLayer.player.getPosition().y==this.getPosition().y)&&(this.gameLayer.player.getPosition().x>this.getPosition().x)) {
-				this.setPosition( new cc.Point(  pos.x+this.vy,pos.y) )
-			}
-			else if (this.gameLayer.player.getPosition().y<this.getPosition().y) {
-				this.setPosition( new cc.Point( pos.x-this.vy,pos.y-this.vy) );
-			}
-			else if (this.gameLayer.player.getPosition().y>this.getPosition().y) {
-				this.setPosition( new cc.Point( pos.x-this.vy,pos.y+this.vy) );
-			};
-			
-		}
-		else if(this.gameLayer.player.getPosition().x>=this.getPosition().x){
-			if ((this.gameLayer.player.getPosition().y==this.getPosition().y)&&(this.gameLayer.player.getPosition().x<this.getPosition().x)) {
-				this.setPosition( new cc.Point( pos.x-this.vy,pos.y) );
-			}
-			else if ((this.gameLayer.player.getPosition().y==this.getPosition().y)&&(this.gameLayer.player.getPosition().x>this.getPosition().x)) {
-				this.setPosition( new cc.Point(  pos.x+this.vy,pos.y) );
-			}
-			else if (this.gameLayer.player.getPosition().y<this.getPosition().y) {
-				this.setPosition( new cc.Point( pos.x+this.vy,pos.y-this.vy) );
-			}
-			else if (this.gameLayer.player.getPosition().y>this.getPosition().y) {
-				this.setPosition( new cc.Point( pos.x+this.vy,pos.y+this.vy) );
-			};
-			
-		};
-
+		var posPlayer = this.gameLayer.player.getPosition();
+		this.check();
+		
 	},
-	create: function(Shoot){
-		//console.log("2222");
+	create: function( Shoot ){
+		
 		var pos = this.getPosition();
 		this.Shoot = Shoot;
 		//console.log(pos.x);
 		//console.log(this.Shoot.getPosition().x);
 		
-		if ((this.Shoot.getPosition().x<=(pos.x+30))&&(this.Shoot.getPosition().x>=(pos.x-30))) {
+		if (( this.Shoot.getPosition().x <= ( pos.x + 30 )) && ( this.Shoot.getPosition().x >= ( pos.x - 30 ))) {
 			//console.log("11111");
-			if ((this.Shoot.getPosition().y<=pos.y+30)&&(this.Shoot.getPosition().y>=pos.y-30)){
+			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y-30 )){
 			//	console.log("33333");
 				/*
 				var animation = new cc.Animation.create();
@@ -94,12 +38,66 @@ var	Enermy = cc.Sprite.extend({
 			this.setPosition( new cc.Point( this.randomX, this.randomY));
 			this.gameLayer.i +=1;
 
-			this.gameLayer.scoreLabel.setString(this.gameLayer.i);
+			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
 			};
 			
 		};
 		//this.initWithFile( 'image/obj2.png' );
-		this.setScale(0.1);
+		this.setScale( 0.1 );
+	},
+	check: function(){
+		var pos = this.getPosition();
+		var posPlayer = this.gameLayer.player.getPosition();
+		
+		// method for end game
+		if ((( posPlayer.x+50 ) >= pos.x ) && ( posPlayer.x - 50 ) <= pos.x ) {
+			if ((( posPlayer.y + 40 ) >= pos.y ) && ( posPlayer.y - 40 ) <= pos.y ) {
+				//this.gameLayer.endGame();
+				this.gameLayer.hpBar.update();
+			};
+			
+		}
+
+		// method for check point to close to player.
+
+		if( posPlayer.x <= pos.x ){
+			if (( posPlayer.x == pos.x ) && ( posPlayer.y < pos.y )) {
+				this.setPosition( new cc.Point( pos.x,pos.y - this.vy ) );
+			}
+			else if (( posPlayer.x == pos.x ) && ( posPlayer.y > pos.y )) {
+				this.setPosition( new cc.Point( pos.x,pos.y+this.vy) );
+			}
+			else if (( posPlayer.y == pos.y ) && ( posPlayer.x < pos.x )) {
+				this.setPosition( new cc.Point( pos.x - this.vy , pos.y ) );
+			}
+			else if (( posPlayer.y == pos.y )&&( posPlayer.x > pos.x )) {
+				this.setPosition( new cc.Point(  pos.x + this.vy,pos.y ) )
+			}
+			else if ( posPlayer.y < pos.y ) {
+				this.setPosition( new cc.Point( pos.x - this.vy , pos.y - this.vy ));
+			}
+			else if ( posPlayer.y > pos.y ) {
+				this.setPosition( new cc.Point( pos.x - this.vy , pos.y + this.vy ));
+			};
+			
+		}
+		else if( posPlayer.x >= pos.x ){
+			if (( posPlayer.y == pos.y ) && (posPlayer.x < pos.x)) {
+				this.setPosition( new cc.Point( pos.x - this.vy , pos.y ) );
+			}
+			else if (( posPlayer.y == pos.y ) && ( posPlayer.x > pos.x )) {
+				this.setPosition( new cc.Point( pos.x + this.vy , pos.y ) );
+			}
+			else if ( posPlayer.y < pos.y ) {
+				this.setPosition( new cc.Point( pos.x + this.vy , pos.y - this.vy ) );
+			}
+			else if ( posPlayer.y > pos.y ) {
+				this.setPosition( new cc.Point( pos.x + this.vy , pos.y + this.vy ) );
+			};
+			
+		};
+
+
 	}
 
 }

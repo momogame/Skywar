@@ -17,7 +17,8 @@
             'src/Shoot.js',
             'src/BackGround.js',
             'src/Enermy1.js',
-            'src/OverFun.js',    //add your own files in order here
+            'src/OverFun.js', 
+            'src/HpBar.js',   //add your own files in order here
         ]
     };
 
