@@ -19,8 +19,10 @@ var HpBar = cc.Sprite.extend({
 		};
 
 		
-		var randomX = Math.random()*800;
-		var randomY = Math.random()*800;
+		var randomX = 450+(Math.random()*400);
+		var randomY = 300+(Math.random()*300);
+		console.log(randomX);
+		console.log(randomY);
 		this.gameLayer.enermy.setPosition( new cc.Point( randomX , randomY));
 
 	}

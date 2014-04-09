@@ -7,18 +7,18 @@ var GameLayer = cc.LayerColor.extend({
         this.back = new BackG();
         this.back.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
         this.addChild( this.back, 1 );
-        this.back.scheduleUpdate();
+        
 
         this.player = new Player();
         this.player.setPosition( new cc.Point( 800 / 2, 600 / 2 ) );
         this.addChild( this.player, 2 );
-        this.player.scheduleUpdate();
+       
         
         
         this.enermy = new Enermy( this );
         this.enermy.setPosition( new cc.Point( 600 , 600 / 2 ) );
         this.addChild( this.enermy, 3 );
-        this.enermy.scheduleUpdate();
+        
 
         this.i = 0;
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial' , 40 );
@@ -35,7 +35,7 @@ var GameLayer = cc.LayerColor.extend({
         return true;
     },
     onKeyDown: function( e ) {
-       
+        
         if (e == 38) {
             this.player.up();
         }
@@ -56,7 +56,12 @@ var GameLayer = cc.LayerColor.extend({
             this.addChild( this.Shoot, 1 );
             this.Shoot.scheduleUpdate(); 
 
-        };
+        }
+        else if ( e == 80 ){
+            this.enermy.scheduleUpdate();
+            this.player.scheduleUpdate();
+            this.back.scheduleUpdate();
+        }
             
         
     },
@@ -67,6 +72,8 @@ var GameLayer = cc.LayerColor.extend({
     },
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
+            this.enermy.unscheduleUpdate();
+            this.player.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
             this.addChild( this.over , 5 );
