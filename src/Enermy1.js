@@ -2,9 +2,15 @@ var	Enermy = cc.Sprite.extend({
 	ctor: function(gameLayer) {
 		this.gameLayer = gameLayer;
 		this._super();
-        this.initWithFile( 'image/obj2.png' );
-        this. setScale	(0.1);
+        this.initWithFile( 'image/e1.png' );
+        this. setScale	(0.5);
         this.vy = 1.5;
+        var animation = new cc.Animation.create();
+        animation.addSpriteFrameWithFile( 'image/e1.png' );
+        animation.addSpriteFrameWithFile( 'image/e2.png' );
+        animation.setDelayPerUnit( 0.2 );
+        var movingAction = cc.RepeatForever.create( cc.Animate.create( animation ) );
+        this.runAction( movingAction );
 	},
 	update: function( dt ){
 		var pos = this.getPosition();
@@ -43,7 +49,7 @@ var	Enermy = cc.Sprite.extend({
 			
 		};
 		//this.initWithFile( 'image/obj2.png' );
-		this.setScale( 0.1 );
+		//this.setScale( 0.1 );
 	},
 	check: function(){
 		var pos = this.getPosition();
