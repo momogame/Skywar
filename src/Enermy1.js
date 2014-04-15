@@ -32,8 +32,8 @@ var	Enermy = cc.Sprite.extend({
 				//create eff boom
 				this.gameLayer.Shoot.removeShoot();
 				//remove shoot
-				this.randomX = Math.random()*800;
-				this.randomY = Math.random()*800;
+				this.randomX = 800+(Math.random()*100);
+				this.randomY = Math.random()*600;
 				this.setPosition( new cc.Point( this.randomX, this.randomY));
 				this.gameLayer.i +=1;
 
