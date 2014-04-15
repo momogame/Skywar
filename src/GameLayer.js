@@ -44,6 +44,12 @@ var GameLayer = cc.LayerColor.extend({
         this.hpBar.setPosition( new cc.Point( 400 ,  550 ) );
         this.addChild( this.hpBar, 5 );
     },
+    createBoom: function( pos ){
+        this.Boom = new Boom(this);
+        this.Boom.setPosition( new cc.Point( pos.x ,  pos.y ) );
+        this.addChild( this.Boom, 5 );
+        this.Boom.scheduleOnce  (this.Boom.update,0.75); 
+    },
     onKeyDown: function( e ) {
         
         if (e == 38) {

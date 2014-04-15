@@ -18,7 +18,8 @@
             'src/BackGround.js',
             'src/Enermy1.js',
             'src/OverFun.js', 
-            'src/HpBar.js',   //add your own files in order here
+            'src/HpBar.js', 
+            'src/Boom.js',  //add your own files in order here
         ]
     };
 

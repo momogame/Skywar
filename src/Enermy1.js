@@ -25,11 +25,13 @@ var	Enermy = cc.Sprite.extend({
 		this.Shoot = Shoot;
 		
 		if (( this.Shoot.getPosition().x <= ( pos.x + 30 )) && ( this.Shoot.getPosition().x >= ( pos.x - 30 ))) {
-			
+			// check hit codition
 			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
 
+				this.gameLayer.createBoom( pos );
+				//create eff boom
 				this.gameLayer.Shoot.removeShoot();
-			
+				//remove shoot
 				this.randomX = Math.random()*800;
 				this.randomY = Math.random()*800;
 				this.setPosition( new cc.Point( this.randomX, this.randomY));
