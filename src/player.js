@@ -6,6 +6,7 @@ var Player = cc.Sprite.extend({
         this.vy = 0;
         this.vx = 0;
         this.started = false;
+        
     } ,
     update: function( dt ) { 
     	var pos = this.getPosition();

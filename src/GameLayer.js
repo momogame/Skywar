@@ -3,36 +3,46 @@ var GameLayer = cc.LayerColor.extend({
         this.state = GameLayer.STATES.FRONT;
         this._super( new cc.Color4B( 127 , 127 , 127 , 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
+        
+        this.crateEnermy();
+        this.createBack();
+        this.createPlayer();
+        this.createCharacter();
+        this.createHpBar();
+        
+        //this.enermy.scheduleUpdate();
 
+        this.setKeyboardEnabled( true );
+        return true;
+    },
+    crateEnermy: function(){
+        this.enermy = new Enermy( this );
+        this.enermy.setPosition( new cc.Point( 600 , 600 / 2 ) );
+        this.addChild( this.enermy, 3 );
+    },
+    createBack: function(){
         this.back = new BackG();
         this.back.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
         this.addChild( this.back, 1 );
         
 
+    },
+    createPlayer: function(){
         this.player = new Player();
         this.player.setPosition( new cc.Point( 800 / 2, 600 / 2 ) );
         this.addChild( this.player, 2 );
        
-        
-        
-        this.enermy = new Enermy( this );
-        this.enermy.setPosition( new cc.Point( 600 , 600 / 2 ) );
-        this.addChild( this.enermy, 3 );
-        
-
+    },
+    createCharacter: function(){
         this.i = 0;
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial' , 40 );
         this.scoreLabel.setPosition( new cc.Point( 750 , 550 ) );
         this.addChild( this.scoreLabel, 3 );
-
-
+    },
+    createHpBar: function(){
         this.hpBar = new HpBar(this);
         this.hpBar.setPosition( new cc.Point( 400 ,  550 ) );
         this.addChild( this.hpBar, 5 );
-        //this.enermy.scheduleUpdate();
-
-        this.setKeyboardEnabled( true );
-        return true;
     },
     onKeyDown: function( e ) {
         

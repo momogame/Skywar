@@ -18,38 +18,28 @@ var	Enermy = cc.Sprite.extend({
 		this.check();
 		
 	},
+	//this method for create new enermy1 if they dies.
 	create: function( Shoot ){
 		
 		var pos = this.getPosition();
 		this.Shoot = Shoot;
-		//console.log(pos.x);
-		//console.log(this.Shoot.getPosition().x);
 		
 		if (( this.Shoot.getPosition().x <= ( pos.x + 30 )) && ( this.Shoot.getPosition().x >= ( pos.x - 30 ))) {
-			//console.log("11111");
-			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y-30 )){
-			//	console.log("33333");
-				/*
-				var animation = new cc.Animation.create();
-			animation.addSpriteFrameWithFile( 'image/Sun1.png' );
-			this.setScale(10);
-			animation.addSpriteFrameWithFile( 'image/obj2.png' );
 			
-			animation.setDelayPerUnit(2);
-			var movingAction = cc.Animate.create( animation );
-			this.runAction( movingAction );
-			*/
-			this.randomX = Math.random()*800;
-			this.randomY = Math.random()*800;
-			this.setPosition( new cc.Point( this.randomX, this.randomY));
-			this.gameLayer.i +=1;
+			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
+
+				this.gameLayer.Shoot.removeShoot();
+			
+				this.randomX = Math.random()*800;
+				this.randomY = Math.random()*800;
+				this.setPosition( new cc.Point( this.randomX, this.randomY));
+				this.gameLayer.i +=1;
 
 			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
 			};
 			
 		};
-		//this.initWithFile( 'image/obj2.png' );
-		//this.setScale( 0.1 );
+		
 	},
 	check: function(){
 		var pos = this.getPosition();
