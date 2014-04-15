@@ -12,6 +12,7 @@ var ammo = cc.Sprite.extend({
             this.gameLayer.removeChild( this );
             //this.removeShoot();
             this.gameLayer.enermy.create( this );
+            this.gameLayer.enermy2.create( this );
     	}
     ,
     removeShoot: function ( ){

@@ -100,3 +100,46 @@ var	Enermy = cc.Sprite.extend({
 
 }
 )
+var	Enermy2 = cc.Sprite.extend({
+	ctor: function(gameLayer) {
+		this.gameLayer = gameLayer;
+		this._super();
+        this.initWithFile( 'image/fly1.png' );
+        this. setScale	(1);
+        this.vy = 1.5;
+    },
+    update: function( dt ){
+    	pos = this.getPosition();
+    	this.setPosition( new cc.Point( pos.x - this.vy , pos.y ) );
+    	if(pos.x < -10){
+    		this.setPosition( new cc.Point( 900 , 300 ) );
+    	}
+    },
+    create: function( Shoot ){
+		
+		var pos = this.getPosition();
+		this.Shoot = Shoot;
+		
+		if (( this.Shoot.getPosition().x <= ( pos.x + 30 )) && ( this.Shoot.getPosition().x >= ( pos.x - 30 ))) {
+			// check hit codition
+			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
+
+				this.gameLayer.createBoom( pos );
+				//create eff boom
+				this.gameLayer.Shoot.removeShoot();
+				//remove shoot
+				this.randomX = 800+(Math.random()*100);
+				this.randomY = Math.random()*600;
+				this.setPosition( new cc.Point( this.randomX, this.randomY));
+				this.gameLayer.i +=1;
+
+			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
+			};
+			
+		};
+		
+	},
+
+	}
+
+	)

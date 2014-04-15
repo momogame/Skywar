@@ -9,6 +9,7 @@ var GameLayer = cc.LayerColor.extend({
         this.createPlayer();
         this.createCharacter();
         this.createHpBar();
+        this.crateEnermy2();
         
         //this.enermy.scheduleUpdate();
 
@@ -19,6 +20,11 @@ var GameLayer = cc.LayerColor.extend({
         this.enermy = new Enermy( this );
         this.enermy.setPosition( new cc.Point( 600 , 600 / 2 ) );
         this.addChild( this.enermy, 3 );
+    },
+    crateEnermy2: function(){
+        this.enermy2 = new Enermy2( this );
+        this.enermy2.setPosition( new cc.Point( 600 , 600 / 2 ) );
+        this.addChild( this.enermy2, 3 );
     },
     createBack: function(){
         this.back = new BackG();
@@ -75,6 +81,8 @@ var GameLayer = cc.LayerColor.extend({
         }
         else if ( e == 80 ){
             this.enermy.scheduleUpdate();
+            this.enermy2.scheduleUpdate();
+
             this.player.scheduleUpdate();
             this.back.scheduleUpdate();
         }
