@@ -141,6 +141,13 @@ var	Enermy = cc.Sprite.extend({
 			 	this.i = 0
 			 };
 		},
+		randomItem: function(){
+			var random = Math.abs(Math.random()*5);
+			console.log(random);
+			if (random <= 1) {
+				this.gameLayer.createItemHp( this.getPosition() );
+			};
+		},
     	check: function(){
 			var pos = this.getPosition();
 			var posPlayer = this.gameLayer.player.getPosition();
@@ -169,6 +176,8 @@ var	Enermy = cc.Sprite.extend({
 			if (( this.Shoot.getPosition().x <= ( pos.x + 30 )) && ( this.Shoot.getPosition().x >= ( pos.x - 30 ))) {
 			// check hit codition
 			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
+
+				this.randomItem();
 
 				this.gameLayer.createBoom( pos );
 				//create eff boom
@@ -199,7 +208,7 @@ var	Enermy = cc.Sprite.extend({
 	createFireEnermy2: function(){
 		this.gameLayer.createFireEnermy2();
 	},
-	
+
 
 	
 }

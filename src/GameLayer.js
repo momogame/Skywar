@@ -73,6 +73,12 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.Efire3, 5 );
         this.Efire3.scheduleUpdate(); 
     },
+    createItemHp: function( pos ){
+        this.ItemHp = new ItemHp(this);
+        this.ItemHp.setPosition( new cc.Point( pos.x ,  pos.y ) );
+        this.addChild( this.ItemHp, 5 );
+        
+    },
     onKeyDown: function( e ) {
         
         if (e == 38) {

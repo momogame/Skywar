@@ -1,12 +1,12 @@
 var	BackG = cc.Sprite.extend({
-	spriteSheet:null,
-    runningAction:null,
-    sprite:null,
+	spriteSheet: null,
+    runningAction: null,
+    sprite: null,
 	ctor: function() {
 		
 		this._super();
        	this.initWithFile( 'image/Back1.gif' );
-       	this. setScale( 2 );
+       	this.setScale( 2 );
         this.vx = 0;
         //this.init();
 	},init:function () {
@@ -36,31 +36,31 @@ var	BackG = cc.Sprite.extend({
     },
 
 	right: function(){
-        	var pos = this.getPosition();
-        	this.vx = -2;
+    	var pos = this.getPosition();
+     	this.vx = -2;
         	//this.setPosition( new cc.Point( pos.x-this.vx,pos.y) );
 	},
 	left : function(){
-			var pos = this.getPosition();
-        	this.vx = 2;
+		var pos = this.getPosition();
+    	this.vx = 2;
         	//this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
 	},
 
 	stop: function(){
-			this.vx = 0;
+		this.vx = 0;
 	},
 	update: function(dt) { 
-		 	var pos = this.getPosition();
+		var pos = this.getPosition();
 		 	
-		 	if((pos.x<=790)&&(pos.x>=120)){
-				this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
-		 	}
-		 	else if((pos.x>=790)&&(this.vx<0)){
-		 		this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
-		 	}
-		 	else if((pos.x<=120)&&(this.vx>0)){
-		 		this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
-		 	};
+	 	if(( pos.x<=790 ) && ( pos.x >= 120 )){
+			this.setPosition( new cc.Point( pos.x + this.vx,pos.y ) );
+	 	}
+	 	else if((pos.x>=790)&&(this.vx<0)){
+	 		this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
+	 	}
+	 	else if((pos.x<=120)&&(this.vx>0)){
+	 		this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
+	 	};
 		 	
 		}
 

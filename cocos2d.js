@@ -19,7 +19,8 @@
             'src/Enermy1.js',
             'src/OverFun.js', 
             'src/HpBar.js', 
-            'src/Boom.js',  //add your own files in order here
+            'src/Boom.js',
+            'src/Item.js',  //add your own files in order here
         ]
     };
 
