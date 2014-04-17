@@ -56,6 +56,13 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.Boom, 5 );
         this.Boom.scheduleOnce  (this.Boom.update,0.75); 
     },
+    createFireEnermy2: function(){
+        var pos1 = this.enermy2.getPosition();
+        this.Efire = new Efire(this);
+        this.Efire.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
+        this.addChild( this.Efire, 5 );
+        this.Efire.scheduleUpdate(); 
+    },
     onKeyDown: function( e ) {
         
         if (e == 38) {
@@ -97,6 +104,7 @@ var GameLayer = cc.LayerColor.extend({
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
             this.enermy.unscheduleUpdate();
+            this.enermy2.unscheduleUpdate();
             this.player.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );

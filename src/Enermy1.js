@@ -127,9 +127,19 @@ var	Enermy = cc.Sprite.extend({
         	this.initWithFile( 'image/fly1.png' );
         	this. setScale	(1);
         	this.vy = 1.5;
+        	this.i = 0;
+        	//this.scheduleOnce  (this.createFireEnermy2,1);
+        	
     	},
     	update: function( dt ){
-    		this.check();
+    		
+    		//this.scheduleOnce  (this.createFireEnermy2,1);
+			 this.check();
+			 this.i += 1;
+			 if (this.i > 60) {
+			 	this.createFireEnermy2();
+			 	this.i = 0
+			 };
 		},
     	check: function(){
 			var pos = this.getPosition();
@@ -176,16 +186,20 @@ var	Enermy = cc.Sprite.extend({
 		
 	},
 	SetNewPosition: function(){
-			var pos = this.getPosition();
-			this.gameLayer.createBoom( pos );
-				//create eff boom
-			this.gameLayer.Shoot.removeShoot();
-				//remove shoot
-			this.randomX = 800+(Math.random()*100);
-			this.randomY = Math.random()*600;
-			this.setPosition( new cc.Point( this.randomX, this.randomY));
-			this.gameLayer.i +=1;
+		var pos = this.getPosition();
+		this.gameLayer.createBoom( pos );
+			//create eff boom
+		this.gameLayer.Shoot.removeShoot();
+			//remove shoot
+		this.randomX = 800+(Math.random()*100);
+		this.randomY = Math.random()*600;
+		this.setPosition( new cc.Point( this.randomX, this.randomY));
+		this.gameLayer.i +=1;
 	},
+	createFireEnermy2: function(){
+		this.gameLayer.createFireEnermy2();
+	},
+	
 
 	
 }
