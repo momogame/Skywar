@@ -58,10 +58,20 @@ var GameLayer = cc.LayerColor.extend({
     },
     createFireEnermy2: function(){
         var pos1 = this.enermy2.getPosition();
-        this.Efire = new Efire(this);
+        this.Efire = new Efire(this, 1);
         this.Efire.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
         this.addChild( this.Efire, 5 );
-        this.Efire.scheduleUpdate(); 
+        this.Efire.scheduleUpdate();
+
+        this.Efire2 = new Efire( this, 2 );
+        this.Efire2.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
+        this.addChild( this.Efire2, 5 );
+        this.Efire2.scheduleUpdate();
+
+        this.Efire3 = new Efire(this , 3);
+        this.Efire3.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
+        this.addChild( this.Efire3, 5 );
+        this.Efire3.scheduleUpdate(); 
     },
     onKeyDown: function( e ) {
         
@@ -87,11 +97,14 @@ var GameLayer = cc.LayerColor.extend({
 
         }
         else if ( e == 80 ){
-            this.enermy.scheduleUpdate();
-            this.enermy2.scheduleUpdate();
+            if ( this.hpBar.scale == 0.8 ) {
+                this.enermy.scheduleUpdate();
+                this.enermy2.scheduleUpdate();
 
-            this.player.scheduleUpdate();
-            this.back.scheduleUpdate();
+                this.player.scheduleUpdate();
+                this.back.scheduleUpdate();
+            };
+            
         }
             
         

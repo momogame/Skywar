@@ -22,16 +22,27 @@ var ammo = cc.Sprite.extend({
 )
 
 var Efire = cc.Sprite.extend({
-    ctor: function( gameLayer ) {
+    ctor: function( gameLayer , type ) {
         this.gameLayer = gameLayer;
         this._super();
+        this.type = type;
         this.initWithFile( 'image/fireE.png' );
         this. setScale( 1 );
     },
     update: function( dt ) { 
         var pos = this.getPosition();
         this.CheckHitPlayer();
-        this.setPosition( new cc.Point( pos.x-5 , pos.y ) );
+        
+        if (this.type == 1) {
+             this.setPosition( new cc.Point( pos.x-5 , pos.y ) );
+        }
+        else if (this.type == 2) {
+             this.setPosition( new cc.Point( pos.x-5 , pos.y + 5 ) );
+        }
+        else if (this.type == 3) {
+             this.setPosition( new cc.Point( pos.x-5 , pos.y - 5 ) );
+        };
+       
         if(pos.x < 0)
             this.gameLayer.removeChild( this );
     },

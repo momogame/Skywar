@@ -4,5 +4,6 @@ var	over = cc.Sprite.extend({
        	this.initWithFile( 'image/gameover.png' );
        	//this.setOpacity();
         this. setScale	( 0.2 );
+        
 	}
 })
