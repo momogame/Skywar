@@ -1,5 +1,6 @@
 var Player = cc.Sprite.extend({
-	ctor: function() {
+	ctor: function(gamelayer) {
+        this.gamelayer = gamelayer;
         this._super();
         this.initWithFile( 'image/h1.png' );
         this. setScale	(1);

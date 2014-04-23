@@ -34,7 +34,7 @@ var GameLayer = cc.LayerColor.extend({
 
     },
     createPlayer: function(){
-        this.player = new Player();
+        this.player = new Player(this);
         this.player.setPosition( new cc.Point( 800 / 2, 600 / 2 ) );
         this.addChild( this.player, 2 );
        
@@ -77,6 +77,7 @@ var GameLayer = cc.LayerColor.extend({
         this.ItemHp = new ItemHp(this);
         this.ItemHp.setPosition( new cc.Point( pos.x ,  pos.y ) );
         this.addChild( this.ItemHp, 5 );
+        this.ItemHp.scheduleUpdate();
         
     },
     onKeyDown: function( e ) {

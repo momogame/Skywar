@@ -27,6 +27,10 @@ var HpBar = cc.Sprite.extend({
 		console.log(randomY);
 		this.gameLayer.enermy.setPosition( new cc.Point( randomX , randomY));
 		*/
+	},
+	setHp: function(){
+		this.scale += 0.2
+		this.setScale(this.scale);
 	}
 }
 )
