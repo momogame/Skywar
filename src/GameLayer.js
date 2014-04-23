@@ -18,12 +18,12 @@ var GameLayer = cc.LayerColor.extend({
     },
     crateEnermy: function(){
         this.enermy = new Enermy( this );
-        this.enermy.setPosition( new cc.Point( 600 , 600 / 2 ) );
+        this.enermy.setPosition( new cc.Point( 900 , 300 ) );
         this.addChild( this.enermy, 3 );
     },
     crateEnermy2: function(){
         this.enermy2 = new Enermy2( this );
-        this.enermy2.setPosition( new cc.Point( 600 , 600 / 2 ) );
+        this.enermy2.setPosition( new cc.Point( 900 , 500    ) );
         this.addChild( this.enermy2, 3 );
     },
     createBack: function(){
@@ -84,26 +84,26 @@ var GameLayer = cc.LayerColor.extend({
         
         if (e == 38) {
             this.player.up();
-        }
-        else if ( e == 40 ) {
+        };
+        if ( e == 40 ) {
             this.player.down();
-        }
-        else if ( e == 39 ) {
+        };
+        if ( e == 39 ) {
             this.player.right();
             this.back.right();
-        }
-        else if ( e == 37 ) {
+        };
+        if ( e == 37 ) {
             this.player.left();
             this.back.left();
-        }
-        else if ( e == 32 ) {
+        };
+        if ( e == 32 ) {
             this.Shoot = new ammo(this);
             this.Shoot.setPosition( new cc.Point( this.player.getPosition().x , this.player.getPosition().y ) );
             this.addChild( this.Shoot, 1 );
             this.Shoot.scheduleUpdate(); 
 
-        }
-        else if ( e == 80 ){
+        };
+        if ( e == 80 ){
             if ( this.hpBar.scale == 0.8 ) {
                 this.enermy.scheduleUpdate();
                 this.enermy2.scheduleUpdate();
@@ -112,7 +112,7 @@ var GameLayer = cc.LayerColor.extend({
                 this.back.scheduleUpdate();
             };
             
-        }
+        };
             
         
     },
@@ -126,6 +126,10 @@ var GameLayer = cc.LayerColor.extend({
             this.enermy.unscheduleUpdate();
             this.enermy2.unscheduleUpdate();
             this.player.unscheduleUpdate();
+            this.Shoot.unscheduleUpdate();
+            this.Efire.unscheduleUpdate();
+            this.Efire2.unscheduleUpdate();
+            this.Efire3.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
             this.addChild( this.over , 5 );
