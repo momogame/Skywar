@@ -29,7 +29,10 @@ var HpBar = cc.Sprite.extend({
 		*/
 	},
 	setHp: function(){
-		this.scale += 0.2
+		if (this.scale < 0.8) {
+			this.scale += 0.2;
+		};
+		
 		this.setScaleX(this.scale);
 	}
 }

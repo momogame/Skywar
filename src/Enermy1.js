@@ -136,7 +136,7 @@ var	Enermy = cc.Sprite.extend({
     		//this.scheduleOnce  (this.createFireEnermy2,1);
 			 this.check();
 			 this.i += 1;
-			 if (this.i > 60) {
+			 if (this.i > 100) {
 			 	this.createFireEnermy2();
 			 	this.i = 0
 			 };
