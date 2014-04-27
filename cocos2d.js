@@ -20,7 +20,8 @@
             'src/OverFun.js', 
             'src/HpBar.js', 
             'src/Boom.js',
-            'src/Item.js',  //add your own files in order here
+            'src/Item.js',
+            'src/resource.js',  //add your own files in order here
         ]
     };
 

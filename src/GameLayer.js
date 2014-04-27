@@ -80,6 +80,15 @@ var GameLayer = cc.LayerColor.extend({
         this.ItemHp.scheduleUpdate();
         
     },
+    createShootPlayer: function(){
+        this.Shoot = new ammo(this);
+        this.Shoot.setPosition( new cc.Point( this.player.getPosition().x , this.player.getPosition().y ) );
+        this.addChild( this.Shoot, 1 );
+        this.Shoot.scheduleUpdate(); 
+        cc.AudioEngine.getInstance().playEffect( 'sound/Shoot1.mp3' );
+
+    }
+    ,
     onKeyDown: function( e ) {
         
         if (e == 38) {
@@ -97,10 +106,7 @@ var GameLayer = cc.LayerColor.extend({
             this.back.left();
         };
         if ( e == 32 ) {
-            this.Shoot = new ammo(this);
-            this.Shoot.setPosition( new cc.Point( this.player.getPosition().x , this.player.getPosition().y ) );
-            this.addChild( this.Shoot, 1 );
-            this.Shoot.scheduleUpdate(); 
+            this.createShootPlayer();
 
         };
         if ( e == 80 ){
