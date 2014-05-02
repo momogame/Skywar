@@ -21,7 +21,8 @@
             'src/HpBar.js', 
             'src/Boom.js',
             'src/Item.js',
-            'src/resource.js',  //add your own files in order here
+            'src/resource.js',
+            'src/Menu.js'  //add your own files in order here
         ]
     };
 
