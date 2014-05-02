@@ -1,8 +1,8 @@
-var Stage2 = cc.Layer.extend({
+var menu = cc.Layer.extend({
 	ctor: function(){
 		this._super();
 		this.init();
-        console.log("5555");
+        
 	},
 	init: function(){
 		this._super();
@@ -13,10 +13,10 @@ var Stage2 = cc.Layer.extend({
         var director = cc.Director.getInstance();
         var winsize = director.getWinSize();
         var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
-        console.log("5555");
+        
         var bg = cc.Sprite.create(s_menu_bg);
         bg.setPosition(cc.p(800/2, 600/2));
-        console.log("5555");
+        
 
         this.addChild(bg);
 
@@ -36,8 +36,8 @@ var Stage2 = cc.Layer.extend({
 var menuScene = cc.Scene.extend({
 	 ctor:function () {
         this._super();
-        var layer = new Stage2();
-        console.log("5555");
+        var layer = new menu();
+        
         //layer.init();
         this.addChild(layer);
     }

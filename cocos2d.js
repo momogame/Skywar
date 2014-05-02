@@ -22,7 +22,8 @@
             'src/Boom.js',
             'src/Item.js',
             'src/resource.js',
-            'src/Menu.js'  //add your own files in order here
+            'src/Menu.js',
+            'src/stage2.js',  //add your own files in order here
         ]
     };
 

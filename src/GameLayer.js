@@ -90,7 +90,11 @@ var GameLayer = cc.LayerColor.extend({
     }
     ,
     onKeyDown: function( e ) {
-        
+        if (e == 78) {
+            //var = Stage2Screen;
+            var director = cc.Director.getInstance();
+            director.replaceScene(cc.TransitionFade.create(1.5, new Stage2Screen()));
+        };
         if (e == 38) {
             this.player.up();
         };
