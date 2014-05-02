@@ -9,7 +9,8 @@ var Boom = cc.Sprite.extend({
         animation.setDelayPerUnit( 0.2 );
         var movingAction = cc.Animate.create( animation );
         this.runAction( movingAction );
-        
+        cc.AudioEngine.getInstance().playEffect( 'sound/bomb.mp3' );
+
 	},
 	
 	update: function( dt ) { 

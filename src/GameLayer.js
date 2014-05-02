@@ -162,5 +162,30 @@ var StartScene = cc.Scene.extend({
 
 });
 
+/*
+this.buttons=[];
+this.buttonSelect=0;
+this.addButton();
+
+
+{
+    for(var i=0;i<buttonNumber;i++) {
+        var button = new Button(i);
+        this.buttons.push(button);
+        this.addChild(this.buttons.length-1);
+    }
+}
+
+onKeyDown {
+    if(down) {
+        this.buttons[this.buttonSelect].unselect();
+        this.buttonSelect++;
+        this.buttons[this.buttonSelect].select();
+
+    }
+    if(choose)
+        this.buttons[this.buttonSelect].run();
+}
+*/
 
 

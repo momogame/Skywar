@@ -13,6 +13,18 @@ var g_resources = [
     {src: 'image/h1.png' },
     {src: 'image/Hpbar.png' },
     {src: 'image/Item.png' },
+
+    //pic player
+    {src: 'image/player/p1.png' },
+    {src: 'image/player/p2.png' },
+    {src: 'image/player/p3.png' },
+    {src: 'image/player/p4.png' },
+    {src: 'image/player/p5.png' },
+
+
+    //sound eff
+    {src: 'sound/Shoot1.mp3'},
+    {src: 'sound/bomb.mp3'},
    
 
 

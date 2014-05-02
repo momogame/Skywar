@@ -2,8 +2,8 @@ var Player = cc.Sprite.extend({
 	ctor: function(gamelayer) {
         this.gamelayer = gamelayer;
         this._super();
-        this.initWithFile( 'image/h1.png' );
-        this. setScale	(1);
+        this.initWithFile( 'image/player/p3.png' );
+        this. setScale	(0.8);
         this.vy = 0;
         this.vx = 0;
         this.started = false;
@@ -35,23 +35,29 @@ var Player = cc.Sprite.extend({
     up: function(){
     	var pos = this.getPosition();
       	this.vy = 5;
+        this.initWithFile( 'image/player/p3.png' );
+
 	},
 	down: function(){
 		var pos = this.getPosition();
     	this.vy = -5;
+        this.initWithFile( 'image/player/p3.png' );
 	},
 	right: function(){
     	var pos = this.getPosition();
     	this.vx = 5;
+        this.initWithFile( 'image/player/p4.png' );
 	},
 	left : function(){
 		var pos = this.getPosition();
     	this.vx = -5;
+        this.initWithFile( 'image/player/p2.png' );
 	},
 
 	stop: function(){
 		this.vy = 0;
 		this.vx = 0;
+        this.initWithFile( 'image/player/p3.png' );
 	},
 	start: function() {
         this.started = true;
