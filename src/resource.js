@@ -1,4 +1,7 @@
 var s_menu_bg = "image/MenuBG.png";
+var Lo_Sky1 = "image/Lo_Sky.png";
+var Lo_Sky2 = "image/Lo_War.png";
+
 
 var g_resources = [
     //image
@@ -33,7 +36,10 @@ var g_resources = [
     {src: 'sound/Shoot1.mp3'},
     {src: 'sound/bomb.mp3'},
    
-
+    //Menu
+    {src: 'image/Lo_Sky.png'},
+    {src: 'image/Lo_War.png'},
+    {src: 'sound/MenuSound.mp3'},
 
  
     //plist

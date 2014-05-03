@@ -6,7 +6,7 @@ var Stage2 = cc.LayerColor.extend({
 	},
     init: function(){
 		this._super();
-		this.back = new BackG2();
+		this.back = new BackG2add();
         this.back.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
         this.addChild( this.back, 1 );
 	}

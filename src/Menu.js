@@ -16,15 +16,43 @@ var menu = cc.Layer.extend({
         
         var bg = cc.Sprite.create(s_menu_bg);
         bg.setPosition(cc.p(800/2, 600/2));
+
+        var Logo1 = cc.Sprite.create(Lo_Sky1);
+        Logo1.setPosition(cc.p(100, 300));
+
+        var Logo2 = cc.Sprite.create(Lo_Sky2);
+        Logo2.setPosition(cc.p(700, 300));
+
+        cc.AudioEngine.getInstance().playMusic( 'sound/MenuSound.mp3', true );
+
+
+
+        var textField = cc.LabelTTF.create("Click TO START ", "electroharmonix", 40);
+        //textField.setAnchorPoint( cc.p( 0.5, 0.5));
+        textField.setPosition( cc.p( 400, 50));
+        textField.setColor( cc.WHITE );
+        //textField.setOpacity(1);
+       // textField.enableStroke(cc.c4b(238,37,37,255),3,true);
+
+        var fadeIn = cc.FadeIn.create(1.0);
+        var fadeOut = cc.FadeOut.create(1.0);
+        var delay = cc.DelayTime.create(0.5);
+        textField.runAction(cc.RepeatForever.create(cc.Sequence.create(fadeIn, delay, fadeOut)));
+        this.addChild(textField,300);
         
 
-        this.addChild(bg);
+        this.addChild(bg , 1);
+        this.addChild( Logo1, 2 );
+        this.addChild( Logo2, 2 );
+
 
         this.setKeyboardEnabled( true );
         return true;
 	},
 	onTouchBegan:function(touch, event) {
+        cc.AudioEngine.getInstance().stopMusic();
         this.onPlay();
+
     },
 
     onPlay : function(){
