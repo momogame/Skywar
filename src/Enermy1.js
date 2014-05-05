@@ -1,7 +1,9 @@
 var	Enermy = cc.Sprite.extend({
-	ctor: function(gameLayer) {
+	ctor: function(gameLayer,id,type) {
 		this.gameLayer = gameLayer;
 		this._super();
+		this.monID=id;
+		this.type=type;
         this.initWithFile( 'image/e1.png' );
         this. setScale	(0.5);
         this.vy = 1.5;
@@ -29,15 +31,20 @@ var	Enermy = cc.Sprite.extend({
 			// check hit codition
 			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
 
-				this.SetNewPosition( pos );
-
+				this.gameLayer.killMon(this);
+				this.killMonThenGetScore();
+				this.gameLayer.createBoom(pos);
 				this.gameLayer.scoreLabel.setString( this.gameLayer.i );
 			};
 			
 		};
 		
 	},
-	
+	killMonThenGetScore: function() {
+
+				this.gameLayer.Shoot.removeShoot();
+				this.gameLayer.i+=1;
+	},
 
 		
 		check: function(){
@@ -48,7 +55,8 @@ var	Enermy = cc.Sprite.extend({
 		if ((( posPlayer.x+50 ) >= pos.x ) && ( posPlayer.x - 50 ) <= pos.x ) {
 			if ((( posPlayer.y + 40 ) >= pos.y ) && ( posPlayer.y - 40 ) <= pos.y ) {
 				//this.gameLayer.endGame();
-				this.SetNewPosition( pos );
+				this.gameLayer.killMon(this);
+				this.gameLayer.createBoom(pos);
 				this.gameLayer.hpBar.update();
 				
 			};
@@ -96,18 +104,6 @@ var	Enermy = cc.Sprite.extend({
 
 
 	},
-		SetNewPosition: function( posi ){
-			//var pos = this.getPosition();
-			var pos = posi;
-			this.gameLayer.createBoom( pos );
-				//create eff boom
-			this.gameLayer.Shoot.removeShoot();
-				//remove shoot
-			this.randomX = 800+(Math.random()*100);
-			this.randomY = Math.random()*600;
-			this.setPosition( new cc.Point( this.randomX, this.randomY));
-			this.gameLayer.i +=1;
-	},
 
 	})
 
@@ -121,9 +117,11 @@ var	Enermy = cc.Sprite.extend({
 
 
 	var	Enermy2 = cc.Sprite.extend({
-		ctor: function(gameLayer) {
+		ctor: function(gameLayer,id,type) {
 			this.gameLayer = gameLayer;
 			this._super();
+			this.monID=id;
+			this.type=type;
         	this.initWithFile( 'image/fly1.png' );
         	this. setScale	(1);
         	this.vy = 1.5;
@@ -137,13 +135,13 @@ var	Enermy = cc.Sprite.extend({
 			 this.check();
 			 this.i += 1;
 			 if (this.i > 100) {
-			 	this.createFireEnermy2();
-			 	this.i = 0
+			 	this.createFireEnermy2( this );
+			 	this.i = 0;
 			 };
 		},
 		randomItem: function(){
 			var random = Math.abs(Math.random()*5);
-			console.log(random);
+			console.log("Item"+random);
 			if (random <= 1) {
 				this.gameLayer.createItemHp( this.getPosition() );
 			};
@@ -157,14 +155,16 @@ var	Enermy = cc.Sprite.extend({
 				if ((( posPlayer.y + 40 ) >= pos.y ) && ( posPlayer.y - 40 ) <= pos.y ) {
 				//this.gameLayer.endGame();
 					this.gameLayer.hpBar.update();
-					this.SetNewPosition();
+					//this.SetNewPosition();
+					this.gameLayer.createBoom(pos);
+					this.gameLayer.killMon( this );
 				};
 			
 			};	
 			pos = this.getPosition();
     		this.setPosition( new cc.Point( pos.x - this.vy , pos.y ) );
     		if(pos.x < -20){
-    			this.setPosition( new cc.Point( 900 , 300 ) );
+    			this.gameLayer.killMon( this );
     		};
 
     	},
@@ -183,9 +183,8 @@ var	Enermy = cc.Sprite.extend({
 				//create eff boom
 				this.gameLayer.Shoot.removeShoot();
 				//remove shoot
-				this.randomX = 800+(Math.random()*100);
-				this.randomY = Math.random()*600;
-				this.setPosition( new cc.Point( this.randomX, this.randomY));
+				this.gameLayer.killMon( this );
+				
 				this.gameLayer.i +=1;
 
 			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
@@ -194,19 +193,8 @@ var	Enermy = cc.Sprite.extend({
 		};
 		
 	},
-	SetNewPosition: function(){
-		var pos = this.getPosition();
-		this.gameLayer.createBoom( pos );
-			//create eff boom
-		this.gameLayer.Shoot.removeShoot();
-			//remove shoot
-		this.randomX = 800+(Math.random()*100);
-		this.randomY = Math.random()*600;
-		this.setPosition( new cc.Point( this.randomX, this.randomY));
-		this.gameLayer.i +=1;
-	},
-	createFireEnermy2: function(){
-		this.gameLayer.createFireEnermy2();
+	createFireEnermy2: function( mon ){
+		this.gameLayer.createFireEnermy2( mon );
 	},
 
 

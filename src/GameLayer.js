@@ -4,39 +4,59 @@ var GameLayer = cc.LayerColor.extend({
         this._super( new cc.Color4B( 127 , 127 , 127 , 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
         
-        this.crateEnermy();
+        //this.crateEnermy();
         this.createBack();
         this.createPlayer();
         this.createCharacter();
         this.createHpBar();
-        this.crateEnermy2();
-        
-        //this.enermy.scheduleUpdate();
+        this.monNum = 0;
+        this.mons = [];
+        //this.crateEnermy2();
 
+        this.Shoot = new ammo(this);
+        this.Shoot.removeShoot();
+        this.schedule( this.createMon,2,Infinity,0 );
         this.setKeyboardEnabled( true );
         return true;
     },
-    crateEnermy: function(){
-        this.enermy = new Enermy( this );
-        this.enermy.setPosition( new cc.Point( 900 , 300 ) );
-        this.addChild( this.enermy, 3 );
+    killMon: function( mon ) {
+        this.removeChild( mon );
+        for( var i=0;i<this.mons.length;i++ ) {
+            if( this.mons[i].monID==mon.monID )
+                this.mons.splice(i,1);
+        }
+        if(this.monNum>20){
+            var director = cc.Director.getInstance();
+            director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
+        }
     },
-    crateEnermy2: function(){
-        this.enermy2 = new Enermy2( this );
-        this.enermy2.setPosition( new cc.Point( 900 , 500    ) );
-        this.addChild( this.enermy2, 3 );
+    createMon: function() {
+        var random = Math.floor(Math.random()*2);
+        var mon = null;
+        if( random == 0 )
+            mon = new Enermy( this,this.monNum , random );
+        else
+            mon = new Enermy2( this,this.monNum , random );
+        this.monNum++;
+        random = Math.floor( Math.random()*400+100 );
+        mon.setPosition( new cc.Point( 900 , random ) );
+        this.mons.push(mon);
+        this.addChild( this.mons[this.mons.length-1], 3 );
+        this.mons[this.mons.length-1].scheduleUpdate();
     },
     createBack: function(){
         this.back = new BackG();
         this.back.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
         this.addChild( this.back, 1 );
+        this.back.scheduleUpdate();
         
 
     },
     createPlayer: function(){
         this.player = new Player(this);
-        this.player.setPosition( new cc.Point( 800 / 2, 600 / 2 ) );
+        this.player.setPosition( new cc.Point( 200, 600 / 2 ) );
         this.addChild( this.player, 2 );
+        this.player.scheduleUpdate();
        
     },
     createCharacter: function(){
@@ -56,22 +76,18 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.Boom, 5 );
         this.Boom.scheduleOnce  (this.Boom.update,0.75); 
     },
-    createFireEnermy2: function(){
-        var pos1 = this.enermy2.getPosition();
-        this.Efire = new Efire(this, 1);
-        this.Efire.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
-        this.addChild( this.Efire, 5 );
-        this.Efire.scheduleUpdate();
-
-        this.Efire2 = new Efire( this, 2 );
-        this.Efire2.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
-        this.addChild( this.Efire2, 5 );
-        this.Efire2.scheduleUpdate();
-
-        this.Efire3 = new Efire(this , 3);
-        this.Efire3.setPosition( new cc.Point( pos1.x ,  pos1.y ) );
-        this.addChild( this.Efire3, 5 );
-        this.Efire3.scheduleUpdate(); 
+    createFireEnermy2: function( mon ){
+        //for( var i=0;i<this.mons.length;i++ ) {
+            //if( this.mons[i].type == 1 ) {
+                var pos = mon.getPosition();
+                for( var i=1;i<=3;i++ ) {
+                    var efire = new Efire( this,i );
+                    efire.setPosition( new cc.Point(pos.x,pos.y) );
+                    this.addChild( efire,5 );
+                    efire.scheduleUpdate();
+                }
+            //}
+        //}
     },
     createItemHp: function( pos ){
         this.ItemHp = new ItemHp(this);
@@ -93,7 +109,7 @@ var GameLayer = cc.LayerColor.extend({
         if (e == 78) {
             //var = Stage2Screen;
             var director = cc.Director.getInstance();
-            director.replaceScene(cc.TransitionFade.create(1.5, new Stage2Screen()));
+            director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
         };
         if (e == 38) {
             this.player.up();
@@ -113,16 +129,7 @@ var GameLayer = cc.LayerColor.extend({
             this.createShootPlayer();
 
         };
-        if ( e == 80 ){
-            if ( this.hpBar.scale == 0.8 ) {
-                this.enermy.scheduleUpdate();
-                this.enermy2.scheduleUpdate();
-
-                this.player.scheduleUpdate();
-                this.back.scheduleUpdate();
-            };
-            
-        };
+       
             
         
     },
@@ -165,6 +172,9 @@ var StartScene = cc.Scene.extend({
     },
 
 });
+
+
+
 
 /*
 this.buttons=[];

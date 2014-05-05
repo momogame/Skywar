@@ -23,7 +23,7 @@
             'src/Item.js',
             'src/resource.js',
             'src/Menu.js',
-            'src/stage2.js',  //add your own files in order here
+            'src/stage2.js', //add your own files in order here
         ]
     };
 

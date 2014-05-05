@@ -58,6 +58,7 @@ var menu = cc.Layer.extend({
     onPlay : function(){
         var director = cc.Director.getInstance();
         director.replaceScene(cc.TransitionFade.create(1.5, new StartScene()));
+
     }
 
 });

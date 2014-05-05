@@ -87,12 +87,12 @@ var BackG2 = cc.Sprite.extend({
     right: function(){
         var pos = this.getPosition();
         this.vx = -2;
-            //this.setPosition( new cc.Point( pos.x-this.vx,pos.y) );
+            this.setPosition( new cc.Point( pos.x-this.vx,pos.y) );
     },
     left : function(){
         var pos = this.getPosition();
         this.vx = 2;
-            //this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
+            this.setPosition( new cc.Point( pos.x+this.vx,pos.y) );
     },
 
     stop: function(){
@@ -115,3 +115,4 @@ var BackG2 = cc.Sprite.extend({
 
 }
 )
+
