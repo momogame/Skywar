@@ -11,6 +11,7 @@ var GameLayer = cc.LayerColor.extend({
         this.createHpBar();
         this.monNum = 0;
         this.mons = [];
+        this.OverStatus = true;
         //this.crateEnermy2();
 
         this.Shoot = new ammo(this);
@@ -31,18 +32,22 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
     createMon: function() {
+
         var random = Math.floor(Math.random()*2);
         var mon = null;
-        if( random == 0 )
+        if (this.OverStatus) {
+            if( random == 0 )
             mon = new Enermy( this,this.monNum , random );
         else
             mon = new Enermy2( this,this.monNum , random );
-        this.monNum++;
-        random = Math.floor( Math.random()*400+100 );
-        mon.setPosition( new cc.Point( 900 , random ) );
-        this.mons.push(mon);
-        this.addChild( this.mons[this.mons.length-1], 3 );
-        this.mons[this.mons.length-1].scheduleUpdate();
+            this.monNum++;
+            random = Math.floor( Math.random()*400+100 );
+            mon.setPosition( new cc.Point( 900 , random ) );
+            this.mons.push(mon);
+            this.addChild( this.mons[this.mons.length-1], 3 );
+            this.mons[this.mons.length-1].scheduleUpdate();
+        };
+        
     },
     createBack: function(){
         this.back = new BackG();
@@ -140,13 +145,13 @@ var GameLayer = cc.LayerColor.extend({
     },
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
-            this.enermy.unscheduleUpdate();
-            this.enermy2.unscheduleUpdate();
-            this.player.unscheduleUpdate();
-            this.Shoot.unscheduleUpdate();
-            this.Efire.unscheduleUpdate();
-            this.Efire2.unscheduleUpdate();
-            this.Efire3.unscheduleUpdate();
+            //this.enermy.unscheduleUpdate();
+
+            //this.enermy2.unscheduleUpdate();
+            this.OverStatus = false;
+            //this.player.unscheduleUpdate();
+            //this.Shoot.unscheduleUpdate();
+            this.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );
             this.addChild( this.over , 5 );
