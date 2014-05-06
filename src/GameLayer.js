@@ -4,6 +4,8 @@ var GameLayer = cc.LayerColor.extend({
         this._super( new cc.Color4B( 127 , 127 , 127 , 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
         
+        cc.AudioEngine.getInstance().playMusic( 'sound/SoundBack.mp3', true );
+        cc.AudioEngine.getInstance().setMusicVolume(0.4);
         //this.crateEnermy();
         this.createBack();
         this.createPlayer();
@@ -12,24 +14,45 @@ var GameLayer = cc.LayerColor.extend({
         this.monNum = 0;
         this.mons = [];
         this.OverStatus = true;
+        this.HpItemStatus = true;
+
         //this.crateEnermy2();
 
         this.Shoot = new ammo(this);
         this.Shoot.removeShoot();
         this.schedule( this.createMon,2,Infinity,0 );
+        this.schedule( this.randomItem,5,Infinity,0 );
         this.setKeyboardEnabled( true );
         return true;
+
+        //this.ItemHp = new ItemHp(this);
     },
+    randomItem: function(){
+            var random = Math.abs(Math.random()*5);
+            console.log("Item"+random);
+            if (random <= 1) {
+                this.createItemHp(900,400);
+            };
+        },
     killMon: function( mon ) {
         this.removeChild( mon );
+        this.monKill++;
         for( var i=0;i<this.mons.length;i++ ) {
             if( this.mons[i].monID==mon.monID )
                 this.mons.splice(i,1);
         }
         if(this.monNum>20){
-            var director = cc.Director.getInstance();
-            director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
+            var textField = cc.LabelTTF.create(" Stage2 ", "electroharmonix", 40);
+            textField.setPosition( cc.p( 400, 50));
+            textField.setColor( cc.WHITE );
+            this.addChild(textField,300);
+
+            this.schedule( this.createStage,2,1,0 );
         }
+    },
+    createStage: function(){
+        var director = cc.Director.getInstance();
+        director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
     },
     createMon: function() {
 
@@ -94,11 +117,14 @@ var GameLayer = cc.LayerColor.extend({
             //}
         //}
     },
-    createItemHp: function( pos ){
-        this.ItemHp = new ItemHp(this);
-        this.ItemHp.setPosition( new cc.Point( pos.x ,  pos.y ) );
-        this.addChild( this.ItemHp, 5 );
-        this.ItemHp.scheduleUpdate();
+    createItemHp: function( x , y ){
+        if (this.HpItemStatus) {
+            this.ItemHp = new ItemHp(this);
+            this.ItemHp.setPosition( new cc.Point( x ,  y ) );
+            this.addChild( this.ItemHp, 5 );
+            this.ItemHp.scheduleUpdate();
+            this.HpItemStatus = false;
+        };
         
     },
     createShootPlayer: function(){
@@ -125,10 +151,12 @@ var GameLayer = cc.LayerColor.extend({
         if ( e == 39 ) {
             this.player.right();
             this.back.right();
+           // this.ItemHp.Right();
         };
         if ( e == 37 ) {
             this.player.left();
             this.back.left();
+            //this.ItemHp.left();
         };
         if ( e == 32 ) {
             this.createShootPlayer();
@@ -141,16 +169,14 @@ var GameLayer = cc.LayerColor.extend({
     onKeyUp: function( e ) {
             this.player.stop();
             this.back.stop();
+           // this.ItemHp.vy = 0;
 
     },
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
-            //this.enermy.unscheduleUpdate();
 
-            //this.enermy2.unscheduleUpdate();
+            
             this.OverStatus = false;
-            //this.player.unscheduleUpdate();
-            //this.Shoot.unscheduleUpdate();
             this.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );

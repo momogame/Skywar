@@ -13,24 +13,34 @@ var Stage2 = cc.Layer.extend({
         this.monNum = 0;
         this.mons = [];
         this.OverStatus = true;
+        this.HpItemStatus = true;
         //this.crateEnermy2();
 
         this.Shoot = new ammo(this);
         this.Shoot.removeShoot();
-        this.schedule( this.createMon,2,Infinity,0 );
+        this.schedule( this.createMon,1,Infinity,0 );
         this.setKeyboardEnabled( true );
         return true;
+
+         this.schedule( this.randomItem,5,Infinity,0 );
     },
+    randomItem: function(){
+            var random = Math.abs(Math.random()*5);
+            console.log("Item"+random);
+            if (random <= 1) {
+                this.createItemHp(900,400);
+            };
+        },
     killMon: function( mon ) {
         this.removeChild( mon );
         for( var i=0;i<this.mons.length;i++ ) {
             if( this.mons[i].monID==mon.monID )
                 this.mons.splice(i,1);
         }
-        if(this.monNum>20){
+        /*if(this.monNum>20){
             var director = cc.Director.getInstance();
             director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
-        }
+        }*/
     },
     createMon: function() {
 

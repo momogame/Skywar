@@ -15,9 +15,12 @@ var	Enermy = cc.Sprite.extend({
         this.runAction( movingAction );
 	},
 	update: function( dt ){
-		var pos = this.getPosition();
-		var posPlayer = this.gameLayer.player.getPosition();
-		this.check();
+		if(this.gameLayer.OverStatus){
+			var pos = this.getPosition();
+			var posPlayer = this.gameLayer.player.getPosition();
+			this.check();
+		};
+		
 		
 	},
 	//this method check ammo hit enermy.
@@ -43,7 +46,7 @@ var	Enermy = cc.Sprite.extend({
 	killMonThenGetScore: function() {
 
 				this.gameLayer.Shoot.removeShoot();
-				this.gameLayer.i+=1;
+				this.gameLayer.i+=100;
 	},
 
 		
@@ -132,12 +135,14 @@ var	Enermy = cc.Sprite.extend({
     	update: function( dt ){
     		
     		//this.scheduleOnce  (this.createFireEnermy2,1);
+    		if(this.gameLayer.OverStatus){
 			 this.check();
 			 this.i += 1;
 			 if (this.i > 100) {
 			 	this.createFireEnermy2( this );
 			 	this.i = 0;
 			 };
+			};
 		},
 		randomItem: function(){
 			var random = Math.abs(Math.random()*5);
@@ -177,7 +182,7 @@ var	Enermy = cc.Sprite.extend({
 			// check hit codition
 			if ((this.Shoot.getPosition().y <= pos.y + 30) && ( this.Shoot.getPosition().y >= pos.y - 30 )){
 
-				this.randomItem();
+				//this.randomItem();
 
 				this.gameLayer.createBoom( pos );
 				//create eff boom
@@ -185,7 +190,7 @@ var	Enermy = cc.Sprite.extend({
 				//remove shoot
 				this.gameLayer.killMon( this );
 				
-				this.gameLayer.i +=1;
+				this.gameLayer.i +=1500;
 
 			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
 			};

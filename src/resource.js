@@ -41,6 +41,10 @@ var g_resources = [
     {src: 'image/Lo_War.png'},
     {src: 'sound/MenuSound.mp3'},
 
+    //Strge2
+    {src: 'sound/SoundBack.mp3'},
+
+
  
     //plist
  
