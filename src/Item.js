@@ -64,3 +64,36 @@ var	ItemHp = cc.Sprite.extend({
 	},
 	
 })
+
+var	coin = cc.Sprite.extend({
+		ctor: function( gameLayer ){
+		this.gameLayer = gameLayer;
+		this._super();
+        this.initWithFile( 'image/coin/coin1.png' );
+         
+         var animation = new cc.Animation.create();
+        animation.addSpriteFrameWithFile( 'image/coin/coin1.png' );
+        animation.addSpriteFrameWithFile( 'image/coin/coin2.png' );
+        animation.addSpriteFrameWithFile( 'image/coin/coin3.png' );
+        animation.addSpriteFrameWithFile( 'image/coin/coin4.png' );
+        animation.setDelayPerUnit( 0.2 );
+        var movingAction = cc.RepeatForever.create( cc.Animate.create( animation ) );
+        this.runAction( movingAction );
+		},
+		update: function( dt ) { 
+			var pos = this.getPosition();
+			var posItem = this.gameLayer.player.getPosition();
+
+			this.setPosition( new cc.Point( pos.x-1,pos.y) );
+
+			if (pos.x <= posItem.x+20 && pos.x >= posItem.x-20) {
+                if (pos.y <= posItem.y+20 && pos.y >= posItem.y-20) {
+                   this.gameLayer.i +=50;
+                   this.gameLayer.scoreLabel.setString( this.gameLayer.i );
+
+                   this.gameLayer.removeChild(this);
+                };
+            };
+		},
+		
+	})

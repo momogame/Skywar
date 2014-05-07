@@ -22,10 +22,16 @@ var GameLayer = cc.LayerColor.extend({
         this.Shoot.removeShoot();
         this.schedule( this.createMon,2,Infinity,0 );
         this.schedule( this.randomItem,5,Infinity,0 );
+        this.schedule( this.createCoin,3,Infinity,0 );
+
+
         this.setKeyboardEnabled( true );
         return true;
 
         //this.ItemHp = new ItemHp(this);
+    },
+    randomPosition: function(){
+        return Math.random()*500;
     },
     randomItem: function(){
             var random = Math.abs(Math.random()*5);
@@ -49,6 +55,12 @@ var GameLayer = cc.LayerColor.extend({
 
             this.schedule( this.createStage,2,1,0 );
         }
+    },
+    createCoin : function(){
+        this.coin = new coin(this);
+        this.coin.setPosition( new cc.Point( 900 ,this.randomPosition()) );
+        this.addChild( this.coin, 1 );
+        this.coin.scheduleUpdate();
     },
     createStage: function(){
         var director = cc.Director.getInstance();
@@ -175,7 +187,7 @@ var GameLayer = cc.LayerColor.extend({
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
 
-            
+            this.coin.unscheduleUpdate();
             this.OverStatus = false;
             this.unscheduleUpdate();
             this.over = new over();

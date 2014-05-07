@@ -19,10 +19,21 @@ var Stage2 = cc.Layer.extend({
         this.Shoot = new ammo(this);
         this.Shoot.removeShoot();
         this.schedule( this.createMon,1,Infinity,0 );
+        
+
+        this.schedule( this.randomItem,5,Infinity,0 );
+        this.schedule( this.createCoin,3,Infinity,0 );
         this.setKeyboardEnabled( true );
         return true;
-
-         this.schedule( this.randomItem,5,Infinity,0 );
+    },
+    randomPosition: function(){
+        return Math.random()*500;
+    },
+    createCoin : function(){
+        this.coin = new coin(this);
+        this.coin.setPosition( new cc.Point( 900 ,this.randomPosition()) );
+        this.addChild( this.coin, 1 );
+        this.coin.scheduleUpdate();
     },
     randomItem: function(){
             var random = Math.abs(Math.random()*5);
@@ -160,8 +171,7 @@ var Stage2 = cc.Layer.extend({
 
             //this.enermy2.unscheduleUpdate();
             this.OverStatus = false;
-            //this.player.unscheduleUpdate();
-            //this.Shoot.unscheduleUpdate();
+            this.coin.unscheduleUpdate();
             this.unscheduleUpdate();
             this.over = new over();
             this.over.setPosition( new cc.Point( 800 / 2 , 600 / 2 ) );

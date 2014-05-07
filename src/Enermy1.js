@@ -190,7 +190,7 @@ var	Enermy = cc.Sprite.extend({
 				//remove shoot
 				this.gameLayer.killMon( this );
 				
-				this.gameLayer.i +=1500;
+				this.gameLayer.i +=200;
 
 			this.gameLayer.scoreLabel.setString( this.gameLayer.i );
 			};
