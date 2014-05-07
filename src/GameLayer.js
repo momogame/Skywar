@@ -15,6 +15,9 @@ var GameLayer = cc.LayerColor.extend({
         this.mons = [];
         this.OverStatus = true;
         this.HpItemStatus = true;
+        this.times = 60;
+        this.createTime();
+
 
         //this.crateEnermy2();
 
@@ -23,7 +26,8 @@ var GameLayer = cc.LayerColor.extend({
         this.schedule( this.createMon,2,Infinity,0 );
         this.schedule( this.randomItem,5,Infinity,0 );
         this.schedule( this.createCoin,3,Infinity,0 );
-
+        this.schedule( this.setTime,1,Infinity,0 );
+        this.schedule( this.createStage,60,1,0 );
 
         this.setKeyboardEnabled( true );
         return true;
@@ -47,6 +51,7 @@ var GameLayer = cc.LayerColor.extend({
             if( this.mons[i].monID==mon.monID )
                 this.mons.splice(i,1);
         }
+        /*
         if(this.monNum>20){
             var textField = cc.LabelTTF.create(" Stage2 ", "electroharmonix", 40);
             textField.setPosition( cc.p( 400, 50));
@@ -55,16 +60,22 @@ var GameLayer = cc.LayerColor.extend({
 
             this.schedule( this.createStage,2,1,0 );
         }
+        */
     },
     createCoin : function(){
+        if (this.OverStatus) {
         this.coin = new coin(this);
         this.coin.setPosition( new cc.Point( 900 ,this.randomPosition()) );
         this.addChild( this.coin, 1 );
         this.coin.scheduleUpdate();
+    };
+       
     },
     createStage: function(){
-        var director = cc.Director.getInstance();
+        if (this.OverStatus) {var director = cc.Director.getInstance();
         director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
+    };
+        
     },
     createMon: function() {
 
@@ -104,6 +115,19 @@ var GameLayer = cc.LayerColor.extend({
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial' , 40 );
         this.scoreLabel.setPosition( new cc.Point( 750 , 550 ) );
         this.addChild( this.scoreLabel, 3 );
+    },
+    createTime: function(){
+       
+        this.scoreLabel2 = cc.LabelTTF.create( this.times , 'Arial' , 40 );
+        this.scoreLabel2.setPosition( new cc.Point( 50 , 550 ) );
+        this.addChild( this.scoreLabel2, 3 );
+    },
+    setTime: function(){
+        if (this.times>0) {
+            this.times -=1;
+        };
+        
+        this.scoreLabel2.setString( this.times );
     },
     createHpBar: function(){
         this.hpBar = new HpBar(this);
@@ -178,6 +202,14 @@ var GameLayer = cc.LayerColor.extend({
             
         
     },
+    showScoll: function(){
+
+        var textField = cc.LabelTTF.create("You score : "+this.i, "electroharmonix", 80);
+        //textField.setAnchorPoint( cc.p( 0.5, 0.5));
+        textField.setPosition( cc.p( 400, 80));
+        textField.setColor( cc.WHITE );
+        this.addChild(textField,300);
+    },
     onKeyUp: function( e ) {
             this.player.stop();
             this.back.stop();
@@ -186,7 +218,7 @@ var GameLayer = cc.LayerColor.extend({
     },
     endGame: function() {
          if(this.state == GameLayer.STATES.FRONT){
-
+            this.showScoll();
             this.coin.unscheduleUpdate();
             this.OverStatus = false;
             this.unscheduleUpdate();

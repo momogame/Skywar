@@ -14,15 +14,16 @@ var Stage2 = cc.Layer.extend({
         this.mons = [];
         this.OverStatus = true;
         this.HpItemStatus = true;
+        this.times = 60;
+        this.createTime();
         //this.crateEnermy2();
 
         this.Shoot = new ammo(this);
         this.Shoot.removeShoot();
         this.schedule( this.createMon,1,Infinity,0 );
-        
-
         this.schedule( this.randomItem,5,Infinity,0 );
         this.schedule( this.createCoin,3,Infinity,0 );
+        //this.schedule( this.createStage,120,1,0 );
         this.setKeyboardEnabled( true );
         return true;
     },
@@ -30,14 +31,16 @@ var Stage2 = cc.Layer.extend({
         return Math.random()*500;
     },
     createCoin : function(){
+        if (this.OverStatus) {
         this.coin = new coin(this);
         this.coin.setPosition( new cc.Point( 900 ,this.randomPosition()) );
         this.addChild( this.coin, 1 );
         this.coin.scheduleUpdate();
+    }
     },
     randomItem: function(){
             var random = Math.abs(Math.random()*5);
-            console.log("Item"+random);
+            console.log("Item2    "+random);
             if (random <= 1) {
                 this.createItemHp(900,400);
             };
@@ -116,11 +119,27 @@ var Stage2 = cc.Layer.extend({
             //}
         //}
     },
-    createItemHp: function( pos ){
-        this.ItemHp = new ItemHp(this);
-        this.ItemHp.setPosition( new cc.Point( pos.x ,  pos.y ) );
-        this.addChild( this.ItemHp, 5 );
-        this.ItemHp.scheduleUpdate();
+    createTime: function(){
+       
+        this.scoreLabel2 = cc.LabelTTF.create( this.times , 'Arial' , 40 );
+        this.scoreLabel2.setPosition( new cc.Point( 50 , 550 ) );
+        this.addChild( this.scoreLabel2, 3 );
+    },
+    setTime: function(){
+        if (this.times>0) {
+            this.times -=1;
+        };
+        this.scoreLabel2.setString( this.times );
+    },
+    createItemHp: function( x , y ){
+ if (this.HpItemStatus) {
+            this.ItemHp = new ItemHp(this);
+            this.ItemHp.setPosition( new cc.Point( x ,  y ) );
+            this.addChild( this.ItemHp, 5 );
+            this.ItemHp.scheduleUpdate();
+            this.HpItemStatus = false;
+        };
+        
         
     },
     createShootPlayer: function(){
@@ -130,8 +149,15 @@ var Stage2 = cc.Layer.extend({
         this.Shoot.scheduleUpdate(); 
         cc.AudioEngine.getInstance().playEffect( 'sound/Shoot1.mp3' );
 
-    }
-    ,
+    },
+    showScoll: function(){
+
+        var textField = cc.LabelTTF.create("You score : "+this.i, "electroharmonix", 80);
+        //textField.setAnchorPoint( cc.p( 0.5, 0.5));
+        textField.setPosition( cc.p( 400, 80));
+        textField.setColor( cc.WHITE );
+        this.addChild(textField,300);
+    },
     onKeyDown: function( e ) {
         if (e == 78) {
             //var = Stage2Screen;
@@ -168,7 +194,7 @@ var Stage2 = cc.Layer.extend({
     endGame: function() {
          if(this.state == Stage2.STATES.FRONT){
             //this.enermy.unscheduleUpdate();
-
+             this.showScoll();
             //this.enermy2.unscheduleUpdate();
             this.OverStatus = false;
             this.coin.unscheduleUpdate();

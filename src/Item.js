@@ -8,7 +8,8 @@ var	ItemHp = cc.Sprite.extend({
         this.randomPosition();
 	},
 	update: function( dt ) { 
-		var pos = this.getPosition();
+		if (this.gameLayer.OverStatus) {
+			var pos = this.getPosition();
 		this.Right();
 		this.setPosition( new cc.Point( pos.x+this.vx,pos.y+this.vy) );
         var posItem = this.gameLayer.player.getPosition();
@@ -31,6 +32,8 @@ var	ItemHp = cc.Sprite.extend({
         	this.gameLayer.removeChild(this);
         	this.gameLayer.HpItemStatus = true;
         };
+		};
+		
 	},
 	randomPosition: function(){
 		var ran = Math.floor(Math.random()*10);
@@ -83,9 +86,11 @@ var	coin = cc.Sprite.extend({
 		update: function( dt ) { 
 			var pos = this.getPosition();
 			var posItem = this.gameLayer.player.getPosition();
-
-			this.setPosition( new cc.Point( pos.x-1,pos.y) );
-
+			if (this.gameLayer.OverStatus) {
+				this.setPosition( new cc.Point( pos.x-1,pos.y) );
+			if (pos.x<-20) {
+				 this.gameLayer.removeChild(this);
+			};
 			if (pos.x <= posItem.x+20 && pos.x >= posItem.x-20) {
                 if (pos.y <= posItem.y+20 && pos.y >= posItem.y-20) {
                    this.gameLayer.i +=50;
@@ -94,6 +99,8 @@ var	coin = cc.Sprite.extend({
                    this.gameLayer.removeChild(this);
                 };
             };
+			};
+			
 		},
 		
 	})
