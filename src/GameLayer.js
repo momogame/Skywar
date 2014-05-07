@@ -73,7 +73,7 @@ var GameLayer = cc.LayerColor.extend({
     },
     createStage: function(){
         if (this.OverStatus) {var director = cc.Director.getInstance();
-        director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
+        director.replaceScene(cc.TransitionFade.create(1.5, new Scene2(this.i)));
     };
         
     },
@@ -176,7 +176,7 @@ var GameLayer = cc.LayerColor.extend({
         if (e == 78) {
             //var = Stage2Screen;
             var director = cc.Director.getInstance();
-            director.replaceScene(cc.TransitionFade.create(1.5, new Scene2()));
+            director.replaceScene(cc.TransitionFade.create(1.5, new Scene2(this.i)));
         };
         if (e == 38) {
             this.player.up();

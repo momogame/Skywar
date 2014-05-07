@@ -1,10 +1,11 @@
 var Stage2 = cc.Layer.extend({
-	init: function() {
+    
+	init: function(i) {
         console.log("layer2");
         this.state = Stage2.STATES.FRONT;
         this._super( new cc.Color4B( 127 , 127 , 127 , 255 ) );
         this.setPosition( new cc.Point( 0 , 0 ) );
-        
+        this.i = i;
         //this.crateEnermy();
         this.createBack();
         this.createPlayer();
@@ -16,6 +17,7 @@ var Stage2 = cc.Layer.extend({
         this.HpItemStatus = true;
         this.times = 60;
         this.createTime();
+        
         //this.crateEnermy2();
 
         this.Shoot = new ammo(this);
@@ -90,8 +92,8 @@ var Stage2 = cc.Layer.extend({
        
     },
     createCharacter: function(){
-        this.i = 0;
-        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial' , 40 );
+        //this.i = 0;
+        this.scoreLabel = cc.LabelTTF.create( this.i , 'Arial' , 40 );
         this.scoreLabel.setPosition( new cc.Point( 750 , 550 ) );
         this.addChild( this.scoreLabel, 3 );
     },
@@ -214,12 +216,12 @@ Stage2.STATES = {
 };
 
 var Scene2 = cc.Scene.extend({
-	 ctor:function () {
+	 ctor:function ( i ) {
         console.log("Scene2");
         this._super();
-        var layer = new Stage2();
-        
-        layer.init();
+        var layer = new Stage2(  );
+        console.log(i);
+        layer.init(i);
         this.addChild(layer);
     }
 });
