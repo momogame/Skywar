@@ -56,7 +56,8 @@ var g_resources = [
     {src: 'image/enermy/mon7.png'},
     {src: 'image/enermy/mon8.png'},
 
-
+    {src: 'image/Missile/i1.png'},
+    {src: 'image/Missile/i2.png'},
  
     //plist
  

@@ -15,6 +15,7 @@ var Stage2 = cc.Layer.extend({
         this.mons = [];
         this.OverStatus = true;
         this.HpItemStatus = true;
+        this.missStatus = false;
         this.times = 60;
         this.createTime();
         
@@ -42,10 +43,14 @@ var Stage2 = cc.Layer.extend({
     },
     randomItem: function(){
             var random = Math.abs(Math.random()*5);
-            console.log("Item2    "+random);
+            //console.log("Item2    "+random);
             if (random <= 1) {
-                this.createItemHp(900,400);
-            };
+                this.createItemHp( 900 ,this.randomPosition());
+            }
+            /*
+            else if (random <= 1.4) {
+                this.createItemHp(900,randomPosition());
+            };*/
         },
     killMon: function( mon ) {
         this.removeChild( mon );

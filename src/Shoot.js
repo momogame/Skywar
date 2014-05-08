@@ -13,9 +13,8 @@ var ammo = cc.Sprite.extend({
             //this.removeShoot();
             for( i=0;i<this.gameLayer.mons.length;i++ )
                 this.gameLayer.mons[i].create( this );
-    	}
-    ,
-    removeShoot: function ( ){
+    	},
+    removeShoot: function (){
         this.gameLayer.removeChild( this );
     },
     }

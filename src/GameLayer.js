@@ -15,6 +15,7 @@ var GameLayer = cc.LayerColor.extend({
         this.mons = [];
         this.OverStatus = true;
         this.HpItemStatus = true;
+        this.missStatus = false;
         this.times = 60;
         this.createTime();
 
@@ -39,10 +40,16 @@ var GameLayer = cc.LayerColor.extend({
     },
     randomItem: function(){
             var random = Math.abs(Math.random()*5);
-            console.log("Item"+random);
+            //console.log("Item2    "+random);
             if (random <= 1) {
-                this.createItemHp(900,400);
-            };
+                this.createItemHp( 900 ,this.randomPosition());
+            }/*
+            else if(random < 5 ){
+                this.i1 = new miss(this);
+                this.i1.setPosition( new cc.Point( 900 , this.randomPosition() ) );
+                this.addChild( this.miss1, 1 );
+                this.Shoot.scheduleUpdate(); 
+            };*/
         },
     killMon: function( mon ) {
         this.removeChild( mon );

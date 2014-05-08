@@ -102,5 +102,37 @@ var	coin = cc.Sprite.extend({
 			};
 			
 		},
+	})
+var	miss = cc.Sprite.extend({
+		ctor: function( gameLayer ){
+		this.gameLayer = gameLayer;
+		this._super();
+        this.initWithFile( 'image/Missile/i1.png' );
+         
+         var animation = new cc.Animation.create();
+        animation.addSpriteFrameWithFile( 'image/Missile/i1.png' );
+        animation.addSpriteFrameWithFile( 'image/Missile/i2.png' );
+       
+        animation.setDelayPerUnit( 0.2 );
+        var movingAction = cc.RepeatForever.create( cc.Animate.create( animation ) );
+        this.runAction( movingAction );
+		},
+		update: function( dt ) { 
+			var pos = this.getPosition();
+			var posItem = this.gameLayer.player.getPosition();
+			if (this.gameLayer.OverStatus) {
+				this.setPosition( new cc.Point( pos.x-1,pos.y) );
+			if (pos.x<-20) {
+				 this.gameLayer.removeChild(this);
+			};
+			if (pos.x <= posItem.x+20 && pos.x >= posItem.x-20) {
+                if (pos.y <= posItem.y+20 && pos.y >= posItem.y-20) {
+                   this.gameLayer.missStatus = true;
+                   this.gameLayer.removeChild(this);
+                };
+            };
+			};
+			
+		},
 		
 	})
