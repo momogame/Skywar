@@ -172,9 +172,10 @@ var GameLayer = cc.LayerColor.extend({
 
     }
     ,
-    onKeyDown: function( e ) {
+    onKeyDown: function( e ) { //console.log(e);
+       
         if (e == 78) {
-            //var = Stage2Screen;
+           
             var director = cc.Director.getInstance();
             director.replaceScene(cc.TransitionFade.create(1.5, new Scene2(this.i)));
         };
@@ -195,7 +196,10 @@ var GameLayer = cc.LayerColor.extend({
             //this.ItemHp.left();
         };
         if ( e == 32 ) {
-            this.createShootPlayer();
+            if (this.OverStatus) {
+                 this.createShootPlayer();
+            };
+           
 
         };
        

@@ -64,9 +64,9 @@ var Stage2 = cc.Layer.extend({
         var mon = null;
         if (this.OverStatus) {
             if( random == 0 )
-            mon = new Enermy( this,this.monNum , random );
+            mon = new Enermy3( this,this.monNum , random );
         else
-            mon = new Enermy2( this,this.monNum , random );
+            mon = new Enermy4( this,this.monNum , random );
             this.monNum++;
             random = Math.floor( Math.random()*400+100 );
             mon.setPosition( new cc.Point( 900 , random ) );
@@ -181,7 +181,9 @@ var Stage2 = cc.Layer.extend({
             this.back.left();
         };
         if ( e == 32 ) {
-            this.createShootPlayer();
+           if (this.OverStatus) {
+                 this.createShootPlayer();
+            };
 
         };
        

@@ -44,6 +44,18 @@ var g_resources = [
     //Strge2
     {src: 'sound/SoundBack.mp3'},
 
+//missile
+    {src: 'image/Missile/miss1.png'},
+    {src: 'image/Missile/miss2.png'},
+    {src: 'image/Missile/miss3.png'},
+
+    {src: 'image/enermy/mon3.png'},
+    {src: 'image/enermy/mon4.png'},
+    {src: 'image/enermy/mon5.png'},
+    {src: 'image/enermy/mon6.png'},
+    {src: 'image/enermy/mon7.png'},
+    {src: 'image/enermy/mon8.png'},
+
 
  
     //plist
